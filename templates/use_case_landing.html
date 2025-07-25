@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ use_case.title }} - Use Case Details</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -173,63 +173,67 @@
 <body data-theme="light">
     <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" style="position:fixed;top:24px;right:32px;z-index:1001;">🌓</button>
     <div id="particles-js"></div>
-    <div class="container-fluid px-0">
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="hero-section text-center" data-aos="fade-down" style="padding-top: 60px;">
-                        {% if use_case.logo_url %}
-                            <img src="{{ use_case.logo_url }}" alt="Use Case Logo" class="img-fluid mb-3" style="max-width:120px;max-height:120px;" onerror="this.style.display='none'" >
-                        {% else %}
-                            <img src="/static/images/logo.png" alt="Default Logo" class="img-fluid mb-3" style="max-width:120px;max-height:120px;opacity:0.3;" >
-                        {% endif %}
-                        <div class="hero-title">{{ use_case.title }}</div>
-                        <div class="hero-desc">{{ use_case.description }}</div>
-                    </div>
-                    <div class="section mb-4" data-aos="fade-up">
-                        <div><span class="section-title">Category:</span> {{ use_case.category }}</div>
-                    </div>
-                    {% if use_case.tech_used %}
-                    <div class="section mb-4" data-aos="fade-up">
-                        <div class="section-title">Technologies Used</div>
-                        <div>
-                            {% for tech in use_case.tech_used.split(',') %}
-                            <span class="tech-chip">{{ tech.strip() }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% if use_case.demo_video_url %}
-                    <div class="section mb-4 video-section" data-aos="fade-up">
-                        <div class="section-title">Demo Video</div>
-                        <div class="ratio ratio-16x9">
-                            <iframe src="{{ use_case.demo_video_url }}" allowfullscreen class="w-100 h-100"></iframe>
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% if use_case.team_members %}
-                    <div class="section mb-4" data-aos="fade-up">
-                        <div class="section-title">Team Members</div>
-                        <div class="team-list">
-                            {% for member in use_case.team_members.split(',') %}
-                            <span class="badge bg-secondary me-2 mb-2">{{ member.strip() }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% if use_case.success_stories %}
-                    <div class="section mb-4" data-aos="fade-up">
-                        <div class="section-title">Success Stories</div>
-                        <div class="success-story">{{ use_case.success_stories }}</div>
-                    </div>
-                    {% endif %}
-                    <div class="cta-section d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mt-4">
-                        <a href="{{ use_case.url }}" class="btn btn-primary cta-btn mb-2 mb-md-0" target="_blank">Visit Solution</a>
-                        <a href="/use-cases" class="btn btn-secondary cta-btn">Back to Use Cases</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Top Navigation Bar -->
+    <nav style="background-color: var(--bg-color); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); border-bottom: 2px solid var(--accent-orange);">
+        <div class="nav-brand" style="display: flex; align-items: center; gap: 15px;">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="width: 180px; height: auto;">
         </div>
+        <ul style="list-style: none; display: flex; gap: 20px; align-items: center; margin: 0;">
+            <li><a href="/" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Home</a></li>
+            <li><a href="/use-cases" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Use Cases</a></li>
+            <li><a href="#contact" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="hero-section" data-aos="fade-down" style="padding-top: 60px;">
+        {% if use_case.logo_url %}
+            <img src="{{ use_case.logo_url }}" alt="Use Case Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;" onerror="this.style.display='none'" >
+        {% else %}
+            <img src="/static/images/logo.png" alt="Default Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;opacity:0.3;" >
+        {% endif %}
+        <div class="hero-title">{{ use_case.title }}</div>
+        <div class="hero-desc">{{ use_case.description }}</div>
+    </div>
+    <div class="section" data-aos="fade-up">
+        <div><span class="section-title">Category:</span> {{ use_case.category }}</div>
+    </div>
+    {% if use_case.tech_used %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Technologies Used</div>
+        {% for tech in use_case.tech_used.split(',') %}
+            <span class="tech-chip">{{ tech.strip() }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if use_case.demo_video_url %}
+    <div class="section video-section" data-aos="zoom-in">
+        <div class="section-title">Demo Video</div>
+        <video controls>
+            <source src="{{ use_case.demo_video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    {% endif %}
+    {% if use_case.team_members %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Team Members</div>
+        <div class="team-list">
+            {% for member in use_case.team_members.split(',') %}
+                <div class="team-member">{{ member.strip() }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if use_case.success_stories %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Success Stories</div>
+        {% for story in use_case.success_stories.split('\n') %}
+            <div class="success-story">{{ story.strip() }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="cta-section" data-aos="fade-up" style="position:relative;z-index:2;">
+        <a href="{{ use_case.url }}" class="cta-btn" target="_blank">Visit Project</a>
+        <a href="/use-cases" class="cta-btn secondary">Back to Use Cases</a>
     </div>
     <script>
         AOS.init({ duration: 1000 });
