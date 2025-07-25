@@ -8,6 +8,8 @@
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         :root, [data-theme="light"] {
             --bg-color: #f5f5f5;
@@ -175,7 +177,7 @@
     <div id="particles-js"></div>
     <!-- Top Navigation Bar -->
     <nav style="background-color: var(--bg-color); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); border-bottom: 2px solid var(--accent-orange);">
-        <div class="nav-brand" style="display: flex; align-items: center; gap: 15px;">
+        <div class="flex-row nav-brand" style="align-items: center; gap: 15px;">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="width: 180px; height: auto;">
         </div>
         <ul style="list-style: none; display: flex; gap: 20px; align-items: center; margin: 0;">
@@ -184,7 +186,7 @@
             <li><a href="#contact" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Contact</a></li>
         </ul>
     </nav>
-    <div class="hero-section" data-aos="fade-down" style="padding-top: 60px;">
+    <div class="container hero-section" data-aos="fade-down" style="padding-top: 60px;">
         {% if use_case.logo_url %}
             <img src="{{ use_case.logo_url }}" alt="Use Case Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;" onerror="this.style.display='none'" >
         {% else %}

@@ -15,6 +15,9 @@
   <!-- Lottie -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -612,120 +615,6 @@
     footer {
       flex-shrink: 0;
     }
-    /* HERO SECTION FLEXBOX RESPONSIVE */
-    .hero-section {
-      width: 100vw;
-      min-height: 55vh;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(120deg, var(--accent-orange) 0%, var(--accent-gray) 100%);
-      border-radius: 0 0 48px 48px;
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
-      margin-bottom: 2em;
-      position: relative;
-      padding: 40px 0 0 0;
-      gap: 32px;
-    }
-    .hero-content {
-      z-index: 2;
-      max-width: 700px;
-      text-align: left;
-      margin-top: 60px;
-      flex: 2 1 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .hero-content h1 {
-      font-size: 2.7rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 1px;
-      margin-bottom: 0.5em;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.10);
-      text-align: left;
-    }
-    .hero-content p {
-      font-size: 1.3rem;
-      color: #fff;
-      font-weight: 500;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-bottom: 2em;
-      text-align: left;
-    }
-    .hero-content .cta-btn {
-      background: var(--accent-orange);
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 18px 48px;
-      font-size: 1.25rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-      text-decoration: none;
-      margin-bottom: 2.5em;
-      display: inline-block;
-    }
-    .hero-animation {
-      position: relative;
-      z-index: 1;
-      flex: 1 1 220px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
-      min-width: 180px;
-      height: 220px;
-      margin-bottom: 0;
-    }
-    .hero-animation lottie-player {
-      width: 220px !important;
-      height: 220px !important;
-      max-width: 100%;
-      max-height: 220px;
-    }
-    @media (max-width: 1100px) {
-      .hero-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        padding: 30px 0 0 0;
-      }
-      .hero-content {
-        margin-top: 30px;
-        text-align: center;
-        align-items: center;
-      }
-      .hero-content h1, .hero-content p {
-        text-align: center;
-      }
-      .hero-animation {
-        margin-top: 20px;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-      }
-    }
-    @media (max-width: 600px) {
-      .hero-section {
-        min-height: 40vh;
-        padding: 18px 0 0 0;
-      }
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .hero-content p {
-        font-size: 1.05rem;
-      }
-      .hero-animation lottie-player {
-        width: 140px !important;
-        height: 140px !important;
-      }
-    }
   </style>
 </head>
 <body data-theme="light">
@@ -755,21 +644,22 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-section" data-aos="fade-down">
-    <div class="hero-content">
-      <h1>AI in Business – Use Cases That Deliver</h1>
-      <p>Explore strategic AI implementations driving innovation, efficiency, and growth across departments. From predictive analytics to intelligent automation, see how enterprises are making smarter decisions with AI.</p>
-      <a href="#usecases-section" class="cta-btn">Browse Use Cases</a>
+  <section class="hero-section" data-aos="fade-down" style="width:100vw;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(120deg, var(--accent-orange) 0%, var(--accent-gray) 100%);border-radius:0 0 48px 48px;box-shadow:0 8px 32px 0 rgba(31,38,135,0.10);margin-bottom:2em;position:relative;">
+    <div style="z-index:2;max-width:700px;text-align:center;margin-top:60px;">
+      <h1 style="font-size:2.7rem;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:0.5em;text-shadow:0 2px 16px rgba(0,0,0,0.10);">AI in Business – Use Cases That Deliver</h1>
+      <p style="font-size:1.3rem;color:#fff;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:2em;">Explore strategic AI implementations driving innovation, efficiency, and growth across departments. From predictive analytics to intelligent automation, see how enterprises are making smarter decisions with AI.</p>
+      <a href="#usecases-section" class="cta-btn" style="background:var(--accent-orange);color:#fff;border:none;border-radius:25px;padding:18px 48px;font-size:1.25rem;font-weight:bold;cursor:pointer;transition:background 0.2s,color 0.2s,transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(0,0,0,0.10);text-decoration:none;margin-bottom:2.5em;display:inline-block;">Browse Use Cases</a>
     </div>
-    <div class="hero-animation">
-      <lottie-player
-        src="https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json"
-        background="transparent"
-        speed="1"
-        loop
-        autoplay>
-      </lottie-player>
-    </div>
+    <div style="position:absolute;right:32px;bottom:0;z-index:1;">
+    <lottie-player
+      src="https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json"
+      background="transparent"
+      speed="1"
+        style="width: 220px; height: 220px;"
+      loop
+      autoplay>
+    </lottie-player>
+  </div>
   </section>
 
   <!-- Search -->

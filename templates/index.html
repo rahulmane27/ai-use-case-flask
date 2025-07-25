@@ -6,6 +6,8 @@
     <title>AI & Innovation Foundry</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         :root, [data-theme="light"] {
             --bg-color: #faf9f6;
@@ -815,7 +817,7 @@
             </video>
         </div>
         <!-- Main Content (appears after animation) -->
-        <div class="main-content" id="mainContent">
+        <div class="container main-content" id="mainContent">
         <a href="/use-cases" class="logo-fixed-corner">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-corner-img">
         </a>
@@ -854,7 +856,7 @@
     </div>
     <!-- Why Choose Us -->
     <h2 style="text-align:center;margin-top:3em;" data-aos="fade-left">Why Choose Us</h2>
-    <div class="why-row" data-aos="fade-left">
+    <div class="flex-row why-row" data-aos="fade-left">
       <div class="why-item"><i class="fas fa-user-graduate"></i><span>Expert Team</span></div>
       <div class="why-item"><i class="fas fa-check-circle"></i><span>Proven Results</span></div>
       <div class="why-item"><i class="fas fa-chart-line"></i><span>Business Value</span></div>
@@ -868,7 +870,7 @@
     </div>
     <!-- Team -->
     <h2 style="text-align:center;margin-top:3em;" data-aos="fade-up-right">Our Team</h2>
-    <div class="team-row" data-aos="fade-up-right">
+    <div class="flex-row team-row" data-aos="fade-up-right">
       <div class="team-member"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Rahul Mane"><div class="name">Rahul Mane</div><div class="role">Founder & CEO</div></div>
       <div class="team-member"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jane Doe"><div class="name">Jane Doe</div><div class="role">Lead Data Scientist</div></div>
       <div class="team-member"><img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith"><div class="name">John Smith</div><div class="role">AI Engineer</div></div>
