@@ -6,6 +6,7 @@
   <title>Admin - AI Use Cases</title>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root, [data-theme="light"] {
@@ -239,19 +240,26 @@
 </head>
 <body data-theme="light">
   <div style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:0.07;background-repeat:no-repeat;background-position:center;background-size:60vw;" aria-hidden="true">
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Watermark Logo" style="width:100%;height:auto;max-width:900px;display:block;margin:auto;" />
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Watermark Logo" class="img-fluid" style="width:100%;height:auto;max-width:900px;display:block;margin:auto;" />
   </div>
   <div class="toast" id="toast"></div>
   <div id="particles-js"></div>
-  <nav>
-    <div class="nav-brand">
-      <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="nav-brand d-flex align-items-center">
+        <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo img-fluid"></a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavMenu" aria-controls="adminNavMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="adminNavMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/use-cases">Use Cases</a></li>
+          <li class="nav-item"><button class="theme-toggle btn btn-light ms-2" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
+        </ul>
+      </div>
     </div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/use-cases">Use Cases</a></li>
-      <li style="margin-left:auto;"><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
-    </ul>
   </nav>
   <div style="max-width:1200px;margin:30px auto 0 auto;padding:0 20px;">
     <div style="background:rgba(0,255,195,0.10);border-radius:14px;padding:18px 24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,255,195,0.08);font-size:1.15rem;font-weight:bold;color:#00ffc3;display:flex;align-items:center;gap:18px;">
@@ -262,32 +270,48 @@
   <h1 class="admin-title">Admin: Manage AI Use Cases</h1>
   <!-- Admin Add Use Case Form -->
   <form class="admin-form-card" id="addUseCaseForm" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Title" required />
-    <textarea name="description" placeholder="Description" required></textarea>
-    <input type="url" name="url" placeholder="Website URL (https://...)" required />
-    <select name="category" required>
-      <option value="">Select Category</option>
-      <option value="finance">Finance</option>
-      <option value="customer-service">Customer Service</option>
-      <option value="hr">HR</option>
-      <option value="document">Document AI</option>
-      <option value="education">Education</option>
-      <option value="retail">Retail</option>
-      <option value="other">Other</option>
-    </select>
-    <input type="text" name="tech_used" placeholder="Technologies Used (comma separated)" />
-    <input type="url" name="demo_video_url" placeholder="Demo Video URL (https://...)" />
-    <input type="text" name="team_members" placeholder="Team Members (comma separated)" />
-    <textarea name="success_stories" placeholder="Success Stories"></textarea>
+    <div class="mb-3">
+      <input type="text" name="title" placeholder="Title" required class="form-control" />
+    </div>
+    <div class="mb-3">
+      <textarea name="description" placeholder="Description" required class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+      <input type="url" name="url" placeholder="Website URL (https://...)" required class="form-control" />
+    </div>
+    <div class="mb-3">
+      <select name="category" required class="form-select">
+        <option value="">Select Category</option>
+        <option value="finance">Finance</option>
+        <option value="customer-service">Customer Service</option>
+        <option value="hr">HR</option>
+        <option value="document">Document AI</option>
+        <option value="education">Education</option>
+        <option value="retail">Retail</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <input type="text" name="tech_used" placeholder="Technologies Used (comma separated)" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <input type="url" name="demo_video_url" placeholder="Demo Video URL (https://...)" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <input type="text" name="team_members" placeholder="Team Members (comma separated)" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <textarea name="success_stories" placeholder="Success Stories" class="form-control"></textarea>
+    </div>
     <label style="width:100%;text-align:left;margin-bottom:8px;">Logo Image:
-      <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
-        <input type="file" name="logo_file" id="logoFileInput" accept="image/*" style="flex:1;" />
-        <img id="logoPreview" src="#" alt="Logo Preview" style="display:none;max-width:80px;max-height:80px;border-radius:10px;border:1px solid #eee;background:#fafafa;" />
+      <div class="d-flex align-items-center gap-3 mt-2">
+        <input type="file" name="logo_file" id="logoFileInput" accept="image/*" class="form-control" style="flex:1;" />
+        <img id="logoPreview" src="#" alt="Logo Preview" style="display:none;max-width:80px;max-height:80px;border-radius:10px;border:1px solid #eee;background:#fafafa;" class="img-fluid" />
         <button type="button" id="removeAddLogoBtn" style="display:none;background:#ff4d4d;color:#fff;border:none;padding:6px 10px;border-radius:6px;font-size:0.95rem;">Remove</button>
       </div>
     </label>
-    <button type="button" id="previewBtn" style="margin-bottom: 10px;">Preview</button>
-    <button type="submit">Add Use Case</button>
+    <button type="button" id="previewBtn" class="btn btn-secondary mb-2">Preview</button>
+    <button type="submit" class="btn btn-primary">Add Use Case</button>
     <div id="formMsg" style="color: red; font-size: 0.95rem;"></div>
   </form>
   <!-- Preview Modal -->
@@ -394,7 +418,7 @@
     {% endfor %}
   </div>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     AOS.init({ duration: 1000 });
     particlesJS("particles-js", {

@@ -15,6 +15,8 @@
   <!-- Lottie -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -621,23 +623,25 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
   <!-- Navigation -->
-  <nav>
-    <div class="nav-brand">
-      <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="nav-brand d-flex align-items-center">
+        <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo img-fluid"></a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#usecases-section">Use Cases</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="loginNavLink">Login</a></li>
+          <li class="nav-item"><button class="theme-toggle btn btn-light ms-2" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
+        </ul>
+      </div>
     </div>
-    <div class="mobile-menu-toggle" id="mobileMenuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="navMenu">
-      <li><a href="/">Home</a></li>
-      <li><a href="#about-section">About</a></li>
-      <li><a href="#usecases-section">Use Cases</a></li>
-      <li><a href="#contact-section">Contact</a></li>
-      <li><a href="#" id="loginNavLink">Login</a></li>
-      <li style="margin-left:auto;"><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
-    </ul>
   </nav>
 
   <!-- Hero Section -->
@@ -684,31 +688,35 @@
     <h2 style="text-align:center;font-size:2rem;font-weight:700;color:var(--accent-orange);margin-bottom:1.2em;letter-spacing:0.5px;">All AI Use Cases</h2>
     <div class="container" style="gap:2em 1.5em;">
       {% if use_cases and use_cases|length > 0 %}
-    {% for uc in use_cases %}
-    <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" style="text-decoration: none; color: inherit;">
-          <div class="card scroll-fade-in" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}">
-        <div class="card-inner">
-          <div class="card-front">
-            {% if uc.logo_url %}
-              <img src="{{ uc.logo_url }}" alt="Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
-            {% else %}
-              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Default Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;opacity:0.3;" />
-            {% endif %}
-                <h3 style="font-size:1.18em;font-weight:700;color:var(--accent-orange);margin-bottom:0.3em;">{{ uc.title }}</h3>
-                <p style="font-size:1em;color:var(--text-color);margin-bottom:0.7em;">{{ uc.description }}</p>
-                <div class="card-footer">
-                  <span class="card-category">{{ uc.category|capitalize }}</span>
-                  <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" class="details-btn">Details</a>
+        <div class="row justify-content-center">
+          {% for uc in use_cases %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+              <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" style="text-decoration: none; color: inherit;">
+                <div class="card scroll-fade-in h-100" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}">
+                  <div class="card-inner">
+                    <div class="card-front">
+                      {% if uc.logo_url %}
+                        <img src="{{ uc.logo_url }}" alt="Logo" class="img-fluid" style="max-width:48px;max-height:48px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
+                      {% else %}
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Default Logo" class="img-fluid" style="max-width:48px;max-height:48px;margin-bottom:8px;opacity:0.3;" />
+                      {% endif %}
+                      <h3 style="font-size:1.18em;font-weight:700;color:var(--accent-orange);margin-bottom:0.3em;">{{ uc.title }}</h3>
+                      <p style="font-size:1em;color:var(--text-color);margin-bottom:0.7em;">{{ uc.description }}</p>
+                      <div class="card-footer">
+                        <span class="card-category">{{ uc.category|capitalize }}</span>
+                        <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" class="details-btn btn btn-outline-primary">Details</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-          </div>
+              </a>
+            </div>
+          {% endfor %}
         </div>
-      </div>
-    </a>
-    {% endfor %}
       {% else %}
-        <div style="width:100%;text-align:center;color:var(--accent-gray);font-size:1.2em;padding:2em 0;">No use cases available yet. Please check back soon!</div>
+        <div class="w-100 text-center text-muted" style="font-size:1.2em;padding:2em 0;">No use cases available yet. Please check back soon!</div>
       {% endif %}
-  </div>
+    </div>
   </section>
 
   <!-- Bold Carousel for Success Stories & Testimonials -->
@@ -971,6 +979,7 @@
       });
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Fake Login Modal -->
   <div id="loginModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,32,38,0.55);z-index:2000;align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(31,38,135,0.13);padding:2.2em 2em 1.5em 2em;max-width:340px;width:90vw;position:relative;display:flex;flex-direction:column;align-items:center;">
