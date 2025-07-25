@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
 
-USE_CASES_FILE = 'use_cases.json'
+USE_CASES_FILE = os.path.join(os.path.dirname(__file__), '../use_cases.json')
 
 def load_use_cases():
     if not os.path.exists(USE_CASES_FILE):
