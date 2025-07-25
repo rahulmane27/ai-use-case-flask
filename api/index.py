@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
 import os
 from werkzeug.utils import secure_filename
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
 
@@ -19,7 +21,12 @@ def save_use_cases(use_cases):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    try:
+        return render_template('index.html')
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc())
+        return "Internal Server Error", 500
 
 @app.route('/use-cases')
 def use_cases():
