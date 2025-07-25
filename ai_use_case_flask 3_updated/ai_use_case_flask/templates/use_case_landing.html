@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ use_case.title }} - Use Case Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        :root, [data-theme="light"] {
+            --bg-color: #f5f5f5;
+            --text-color: #232526;
+            --accent-orange: #ff7f32;
+            --accent-gray: #888;
+            --card-bg: #fff;
+            --card-border: #e0e0e0;
+        }
+        [data-theme="dark"] {
+            --bg-color: #181818;
+            --text-color: #f5f5f5;
+            --accent-orange: #ff7f32;
+            --accent-gray: #bbb;
+            --card-bg: #232526;
+            --card-border: #333;
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-bottom: 16px;
+        }
+        .hero-desc {
+            font-size: 1.3rem;
+            margin-bottom: 32px;
+            color: #555;
+        }
+        .section {
+            background: var(--card-bg);
+            border-radius: 18px;
+            margin: 32px auto;
+            padding: 32px 24px;
+            max-width: 800px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1.5px solid var(--card-border);
+            color: var(--text-color);
+        }
+        .section-title {
+            color: var(--accent-orange);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+        .tech-chip {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: #111;
+            border-radius: 16px;
+            padding: 6px 16px;
+            margin: 0 8px 8px 0;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .video-section {
+            text-align: center;
+        }
+        .video-section video {
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,255,195,0.12);
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .team-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .team-member {
+            background: #222;
+            color: var(--accent-orange);
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .success-story {
+            background: var(--card-bg);
+            color: #555;
+            border-left: 4px solid var(--accent-orange);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .cta-section {
+            text-align: center;
+            margin: 56px 0 0 0;
+            padding: 32px 0 24px 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+            color: var(--text-color);
+        }
+        .cta-btn {
+            background: var(--accent-orange);
+            color: #fff;
+            border: 1.5px solid var(--accent-orange);
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 4px;
+            transition: 0.2s;
+            box-shadow: 0 4px 16px rgba(255,127,50,0.18);
+            outline: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+        .cta-btn:hover, .cta-btn:focus {
+            opacity: 0.92;
+            transform: scale(1.04);
+            background: var(--accent-gray);
+            color: #fff;
+            border-color: var(--accent-gray);
+        }
+        .cta-btn.secondary {
+            background: var(--accent-gray);
+            color: #fff;
+            border: 1.5px solid var(--accent-gray);
+        }
+        @media (max-width: 600px) {
+            .hero-title { font-size: 2rem; }
+            .section { padding: 18px 6vw; }
+            .cta-section {
+                flex-direction: column;
+                gap: 18px;
+                padding: 18px 0 12px 0;
+                margin-top: 32px;
+            }
+            .cta-btn {
+                width: 90vw;
+                max-width: 220px;
+                font-size: 0.98rem;
+                padding: 9px 0;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" style="position:fixed;top:24px;right:32px;z-index:1001;">🌓</button>
+    <div id="particles-js"></div>
+    <!-- Top Navigation Bar -->
+    <nav style="background-color: var(--bg-color); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); border-bottom: 2px solid var(--accent-orange);">
+        <div class="nav-brand" style="display: flex; align-items: center; gap: 15px;">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="width: 180px; height: auto;">
+        </div>
+        <ul style="list-style: none; display: flex; gap: 20px; align-items: center; margin: 0;">
+            <li><a href="/" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Home</a></li>
+            <li><a href="/use-cases" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Use Cases</a></li>
+            <li><a href="#contact" style="color: var(--text-color); text-decoration: none; font-weight: bold;">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="hero-section" data-aos="fade-down" style="padding-top: 60px;">
+        {% if use_case.logo_url %}
+            <img src="{{ use_case.logo_url }}" alt="Use Case Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;" onerror="this.style.display='none'" >
+        {% else %}
+            <img src="/static/images/logo.png" alt="Default Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;opacity:0.3;" >
+        {% endif %}
+        <div class="hero-title">{{ use_case.title }}</div>
+        <div class="hero-desc">{{ use_case.description }}</div>
+    </div>
+    <div class="section" data-aos="fade-up">
+        <div><span class="section-title">Category:</span> {{ use_case.category }}</div>
+    </div>
+    {% if use_case.tech_used %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Technologies Used</div>
+        {% for tech in use_case.tech_used.split(',') %}
+            <span class="tech-chip">{{ tech.strip() }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if use_case.demo_video_url %}
+    <div class="section video-section" data-aos="zoom-in">
+        <div class="section-title">Demo Video</div>
+        <video controls>
+            <source src="{{ use_case.demo_video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    {% endif %}
+    {% if use_case.team_members %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Team Members</div>
+        <div class="team-list">
+            {% for member in use_case.team_members.split(',') %}
+                <div class="team-member">{{ member.strip() }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if use_case.success_stories %}
+    <div class="section" data-aos="fade-up">
+        <div class="section-title">Success Stories</div>
+        {% for story in use_case.success_stories.split('\n') %}
+            <div class="success-story">{{ story.strip() }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="cta-section" data-aos="fade-up" style="position:relative;z-index:2;">
+        <a href="{{ use_case.url }}" class="cta-btn" target="_blank">Visit Project</a>
+        <a href="/use-cases" class="cta-btn secondary">Back to Use Cases</a>
+    </div>
+    <script>
+        AOS.init({ duration: 1000 });
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ffc3" },
+                shape: { type: "circle" },
+                opacity: { value: 0.2 },
+                size: { value: 3 },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ffc3",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                },
+                modes: {
+                    repulse: { distance: 100 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+        // Scroll to top on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
+        });
+        // Robust theme toggle logic (universal)
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            function setTheme(theme) {
+                document.body.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                themeToggle.textContent = theme === 'dark' ? '🌙' : '🌓';
+            }
+            const savedTheme = localStorage.getItem('theme');
+            setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+            themeToggle.addEventListener('click', function() {
+                const current = document.body.getAttribute('data-theme');
+                setTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        });
+    </script>
+</body>
+</html> 

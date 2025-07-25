@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Use Cases</title>
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Particle.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root, [data-theme="light"] {
+      --bg-color: #fff;
+      --text-color: #232526;
+      --accent-orange: #ff7f32;
+      --accent-gray: #888;
+      --card-bg: #fff;
+      --card-border: #e0e0e0;
+      --nav-bg: #fff;
+    }
+    [data-theme="dark"] {
+      --bg-color: #181818;
+      --text-color: #f5f5f5;
+      --accent-orange: #ff7f32;
+      --accent-gray: #bbb;
+      --card-bg: #232526;
+      --card-border: #333;
+      --nav-bg: #232526;
+    }
+
+    body {
+      background: var(--bg-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Navbar - Enhanced with mobile support */
+    nav {
+      background: var(--nav-bg);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      transition: background-color 0.3s ease;
+    }
+    
+    /* Logo and Brand Section */
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .company-logo {
+      width: 180px;
+      height: auto;
+      transition: all 0.3s ease;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    nav ul li a {
+      color: var(--accent-gray);
+      font-weight: 600;
+      text-shadow: none;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--accent-orange);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    /* Dark/Light Mode Toggle */
+    .theme-toggle {
+      background: var(--accent-orange);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      color: var(--bg-color);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      nav ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        flex-direction: column;
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      nav ul.mobile-menu-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      .company-logo {
+        width: 140px;
+      }
+      .nav-brand {
+        gap: 10px;
+      }
+    }
+
+    .lottie-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin: 20px 0;
+    }
+
+    .search-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .search-container input {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1.5px solid #ff7f32;
+      outline: none;
+      width: 300px;
+      font-size: 1rem;
+      background: #fff;
+      color: #232526;
+      backdrop-filter: blur(10px);
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .search-container input:focus {
+      border: 2px solid #ff7f32;
+      box-shadow: 0 0 0 2px rgba(255,127,50,0.15);
+    }
+
+    /* Filter Tags */
+    .filter-container {
+      text-align: center;
+      margin: 20px 0;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 18px 0 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .filter-tag {
+      display: inline-block;
+      background: var(--accent-orange);
+      color: var(--bg-color);
+      padding: 8px 16px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 1.08em;
+      box-shadow: 0 1px 4px rgba(255,127,50,0.08);
+      position: relative;
+    }
+    .filter-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(255, 127, 50, 0.3);
+    }
+    .filter-tag.active {
+      background: transparent;
+      border: 2px solid var(--accent-orange);
+      color: var(--accent-orange);
+      box-shadow: 0 2px 8px rgba(255,127,50,0.15);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Enhanced Cards with Flip Animation */
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.06), 0 1.5px 8px 0 rgba(0,0,0,0.06);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px;
+      width: 300px;
+      min-width: 260px;
+      max-width: 340px;
+      height: 240px;
+      max-height: 240px;
+      backdrop-filter: blur(10px);
+      will-change: transform;
+      perspective: 1000px;
+      transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s, background 0.2s;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      color: var(--text-color);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .card:hover {
+      background: linear-gradient(120deg, var(--card-bg) 80%, var(--accent-orange) 120%);
+      border: 1.5px solid var(--accent-orange);
+      box-shadow: 0 16px 48px 0 rgba(255,127,50,0.18), 0 2px 12px 0 rgba(0,0,0,0.10);
+      transform: translateY(-6px) scale(1.035);
+      z-index: 2;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      min-height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-back {
+      background: linear-gradient(135deg, var(--accent-orange), rgba(255, 127, 50, 0.3));
+      transform: rotateY(180deg);
+      border-radius: 15px;
+      color: var(--bg-color);
+      padding: 20px;
+    }
+
+    .card h3 {
+      color: var(--accent-orange);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-line;
+      margin-bottom: 0.5em;
+      max-width: 100%;
+      height: 60px;
+      max-height: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      position: relative;
+      color: var(--text-color);
+    }
+
+    /* Update card footer for horizontal button layout and consistent style */
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7em;
+      padding-top: 10px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.98em;
+    }
+    .card-category {
+      background: var(--accent-orange);
+      color: #fff;
+      border-radius: 12px;
+      padding: 3px 14px;
+      font-weight: 600;
+      font-size: 0.98em;
+      letter-spacing: 0.5px;
+      margin-right: 8px;
+    }
+    .details-btn, .document-btn {
+      background: linear-gradient(90deg, #181818 80%, #232526 100%);
+      color: #fff;
+      border: 3px solid #ff7f32;
+      border-radius: 32px;
+      padding: 0.5em 1.3em;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+      box-shadow: 0 2px 8px rgba(255,127,50,0.10);
+      text-decoration: none;
+      display: inline-block;
+      margin: 0;
+    }
+    .details-btn:hover, .document-btn:hover {
+      background: linear-gradient(90deg, #ff7f32 80%, #ff7f32 100%);
+      color: #fff;
+      border-color: #ff7f32;
+    }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--accent-orange);
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      background: var(--accent-orange);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-to-top:hover {
+      transform: scale(1.1);
+    }
+
+    /* Floating Action Button */
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--accent-orange);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      color: var(--bg-color);
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(255, 127, 50, 0.5);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Fake Chat UI */
+    .chat-box {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 320px;
+      max-width: 90vw;
+      max-height: 80vh;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(31,38,135,0.13);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1.5px solid var(--accent-orange);
+      color: var(--text-color);
+      z-index: 1001;
+      padding: 0;
+    }
+    .chat-box .chat-illustration {
+      width: 100%;
+      max-width: 180px;
+      max-height: 110px;
+      margin: 0 auto 0.5em auto;
+      display: block;
+      object-fit: contain;
+      overflow: hidden;
+      border-radius: 0 0 18px 18px;
+    }
+    @media (max-width: 600px) {
+      .chat-box {
+        right: 5vw;
+        bottom: 80px;
+        width: 98vw;
+        max-width: 98vw;
+        min-width: 0;
+        border-radius: 12px;
+      }
+      .chat-box .chat-illustration {
+        max-width: 120px;
+        max-height: 70px;
+      }
+    }
+
+    .chat-header {
+      background: var(--accent-orange);
+      padding: 10px;
+      color: var(--bg-color);
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .chat-messages {
+      padding: 10px;
+      flex-grow: 1;
+      overflow-y: auto;
+      color: var(--text-color);
+    }
+
+    .chat-messages p {
+      margin-bottom: 8px;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid var(--accent-orange);
+    }
+
+    .chat-input input {
+      flex-grow: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+      background: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .chat-input button {
+      background: var(--accent-orange);
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      color: var(--bg-color);
+    }
+
+    /* Floating Lottie animation in top-right */
+    #floating-lottie {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 120px;
+      height: 120px;
+      z-index: 15;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* Toast Notifications */
+    .toast {
+      position: fixed;
+      bottom: 110px;
+      right: 60px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      padding: 16px 24px;
+      border-radius: 18px 18px 18px 6px;
+      box-shadow: 0 4px 15px rgba(255, 127, 50, 0.18);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      z-index: 1001;
+      font-size: 1.08rem;
+      font-family: inherit;
+      max-width: 320px;
+      border: 1.5px solid var(--accent-orange);
+      margin-bottom: 10px;
+    }
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .toast::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 24px;
+      width: 24px;
+      height: 24px;
+      background: var(--card-bg);
+      border-bottom-left-radius: 18px;
+      transform: rotate(45deg);
+      border-left: 1.5px solid var(--accent-orange);
+      border-bottom: 1.5px solid var(--accent-orange);
+      z-index: -1;
+    }
+    .scroll-fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+    }
+    .scroll-fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        gap: 1em 0.5em !important;
+      }
+      .card {
+        width: 95vw;
+        max-width: 350px;
+        min-width: 180px;
+        height: auto;
+        max-height: none;
+      }
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto;
+    }
+    footer {
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div id="particles-js"></div>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">
+      <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo"></a>
+    </div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="navMenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="#about-section">About</a></li>
+      <li><a href="#usecases-section">Use Cases</a></li>
+      <li><a href="#contact-section">Contact</a></li>
+      <li><a href="#" id="loginNavLink">Login</a></li>
+      <li style="margin-left:auto;"><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" data-aos="fade-down" style="width:100vw;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(120deg, var(--accent-orange) 0%, var(--accent-gray) 100%);border-radius:0 0 48px 48px;box-shadow:0 8px 32px 0 rgba(31,38,135,0.10);margin-bottom:2em;position:relative;">
+    <div style="z-index:2;max-width:700px;text-align:center;margin-top:60px;">
+      <h1 style="font-size:2.7rem;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:0.5em;text-shadow:0 2px 16px rgba(0,0,0,0.10);">AI in Business – Use Cases That Deliver</h1>
+      <p style="font-size:1.3rem;color:#fff;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:2em;">Explore strategic AI implementations driving innovation, efficiency, and growth across departments. From predictive analytics to intelligent automation, see how enterprises are making smarter decisions with AI.</p>
+      <a href="#usecases-section" class="cta-btn" style="background:var(--accent-orange);color:#fff;border:none;border-radius:25px;padding:18px 48px;font-size:1.25rem;font-weight:bold;cursor:pointer;transition:background 0.2s,color 0.2s,transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(0,0,0,0.10);text-decoration:none;margin-bottom:2.5em;display:inline-block;">Browse Use Cases</a>
+    </div>
+    <div style="position:absolute;right:32px;bottom:0;z-index:1;">
+    <lottie-player
+      src="https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json"
+      background="transparent"
+      speed="1"
+        style="width: 220px; height: 220px;"
+      loop
+      autoplay>
+    </lottie-player>
+  </div>
+  </section>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search use cases...">
+  </div>
+
+  <!-- Filter Bar -->
+  <div style="max-width:900px;margin:0 auto 0.5em auto;" data-aos="fade-right">
+    <h2 style="text-align:center;font-size:1.5rem;font-weight:700;color:var(--accent-orange);margin-bottom:0.2em;letter-spacing:0.5px;">Filter by Category</h2>
+  <div class="filter-container">
+      <span style="margin-right:10px;display:flex;align-items:center;font-size:1.2em;color:var(--accent-orange);"><i class="fas fa-filter"></i></span>
+    <div class="filter-tag active" data-category="all">All</div>
+    <div class="filter-tag" data-category="finance">Finance</div>
+    <div class="filter-tag" data-category="customer-service">Customer Service</div>
+    <div class="filter-tag" data-category="hr">HR</div>
+    <div class="filter-tag" data-category="document">Document AI</div>
+    <div class="filter-tag" data-category="education">Education</div>
+    <div class="filter-tag" data-category="retail">Retail</div>
+    </div>
+  </div>
+
+  <!-- Use Case Grid -->
+  <section id="usecases-section" data-aos="fade-up" style="background:linear-gradient(120deg, var(--section-bg) 80%, #f7e9e1 120%);border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);padding:2.5em 0 2em 0;margin:2em 0;">
+    <h2 style="text-align:center;font-size:2rem;font-weight:700;color:var(--accent-orange);margin-bottom:1.2em;letter-spacing:0.5px;">All AI Use Cases</h2>
+    <div class="container" style="gap:2em 1.5em;">
+      {% if use_cases and use_cases|length > 0 %}
+    {% for uc in use_cases %}
+    <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" style="text-decoration: none; color: inherit;">
+          <div class="card scroll-fade-in" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}">
+        <div class="card-inner">
+          <div class="card-front">
+            {% if uc.logo_url %}
+              <img src="{{ uc.logo_url }}" alt="Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
+            {% else %}
+              <img src="/static/images/logo.png" alt="Default Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;opacity:0.3;" />
+            {% endif %}
+                <h3 style="font-size:1.18em;font-weight:700;color:var(--accent-orange);margin-bottom:0.3em;">{{ uc.title }}</h3>
+                <p style="font-size:1em;color:var(--text-color);margin-bottom:0.7em;">{{ uc.description }}</p>
+                <div class="card-footer">
+                  <span class="card-category">{{ uc.category|capitalize }}</span>
+                  <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" class="details-btn">Details</a>
+                </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+      {% else %}
+        <div style="width:100%;text-align:center;color:var(--accent-gray);font-size:1.2em;padding:2em 0;">No use cases available yet. Please check back soon!</div>
+      {% endif %}
+  </div>
+  </section>
+
+  <!-- Bold Carousel for Success Stories & Testimonials -->
+  <section style="max-width:1100px;margin:3em auto 2em auto;padding:2.5em 1.5em;background:var(--card-bg);border-radius:32px;box-shadow:0 4px 24px rgba(31,38,135,0.08);">
+    <h2 style="text-align:center;font-size:2rem;font-weight:900;color:var(--accent-orange);margin-bottom:1.2em;letter-spacing:0.5px;font-family:'Inter','Segoe UI',sans-serif;">Success Stories & Testimonials</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:2.5em;justify-content:center;align-items:stretch;">
+      <div style="flex:1 1 260px;min-width:260px;max-width:340px;background:var(--section-bg);border-radius:16px;padding:1.5em 1.2em;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;justify-content:space-between;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Priya Singh" style="width:56px;height:56px;border-radius:50%;border:2.5px solid var(--accent-orange);object-fit:cover;margin-bottom:0.7em;">
+        <blockquote style="font-size:1.13em;color:var(--accent-gray);margin:0 0 1em 0;font-style:italic;text-align:center;">“With AI-powered automation, we reduced our processing time by 60% and improved accuracy across the board.”</blockquote>
+        <div style="font-weight:700;color:var(--accent-orange);">Priya Singh</div>
+        <div style="color:var(--accent-gray);font-size:0.98em;">Head of Analytics, DataX</div>
+      </div>
+      <div style="flex:1 1 260px;min-width:260px;max-width:340px;background:var(--section-bg);border-radius:16px;padding:1.5em 1.2em;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;justify-content:space-between;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Alex Turner" style="width:56px;height:56px;border-radius:50%;border:2.5px solid var(--accent-blue);object-fit:cover;margin-bottom:0.7em;">
+        <blockquote style="font-size:1.13em;color:var(--accent-gray);margin:0 0 1em 0;font-style:italic;text-align:center;">“The predictive analytics solution helped us make smarter decisions and drive business growth.”</blockquote>
+        <div style="font-weight:700;color:var(--accent-blue);">Alex Turner</div>
+        <div style="color:var(--accent-gray);font-size:0.98em;">CTO, TechCorp</div>
+      </div>
+      <div style="flex:1 1 260px;min-width:260px;max-width:340px;background:var(--section-bg);border-radius:16px;padding:1.5em 1.2em;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;justify-content:space-between;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Emily Clark" style="width:56px;height:56px;border-radius:50%;border:2.5px solid #e26ad7;object-fit:cover;margin-bottom:0.7em;">
+        <blockquote style="font-size:1.13em;color:var(--accent-gray);margin:0 0 1em 0;font-style:italic;text-align:center;">“Intelligent automation from this team transformed our operations and freed up valuable resources.”</blockquote>
+        <div style="font-weight:700;color:#e26ad7;">Emily Clark</div>
+        <div style="color:var(--accent-gray);font-size:0.98em;">Product Manager, RetailPro</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team & Partners Section -->
+  <section data-aos="fade-up-right" style="max-width:1100px;margin:3em auto 2em auto;padding:2.5em 1.5em;background:linear-gradient(120deg,#fff7f0 0%,#e0f7fa 100%);border-radius:32px;box-shadow:0 4px 24px rgba(31,38,135,0.08);">
+    <h2 style="text-align:center;font-size:2rem;font-weight:900;color:var(--accent-orange);margin-bottom:1.2em;letter-spacing:0.5px;font-family:'Inter','Segoe UI',sans-serif;">Meet Our Team & Partners</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:2.5em;justify-content:center;align-items:stretch;">
+      <div style="flex:1 1 180px;min-width:180px;max-width:220px;background:rgba(255,255,255,0.92);border-radius:18px;padding:1.5em 1em;box-shadow:0 2px 12px rgba(255,127,50,0.08);display:flex;flex-direction:column;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Rahul Mane" style="width:60px;height:60px;border-radius:50%;border:2.5px solid #ff7f32;object-fit:cover;margin-bottom:0.7em;">
+        <div style="font-weight:800;color:#ff7f32;font-size:1.08em;">Rahul Mane</div>
+        <div style="color:#888;font-size:0.98em;margin-bottom:0.5em;">Founder & CEO</div>
+        <img src="/static/images/logo.png" alt="Neutrino Tech Systems" style="width:48px;height:auto;opacity:0.7;">
+      </div>
+      <div style="flex:1 1 180px;min-width:180px;max-width:220px;background:rgba(255,255,255,0.92);border-radius:18px;padding:1.5em 1em;box-shadow:0 2px 12px rgba(74,144,226,0.08);display:flex;flex-direction:column;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jane Doe" style="width:60px;height:60px;border-radius:50%;border:2.5px solid #4a90e2;object-fit:cover;margin-bottom:0.7em;">
+        <div style="font-weight:800;color:#4a90e2;font-size:1.08em;">Jane Doe</div>
+        <div style="color:#888;font-size:0.98em;margin-bottom:0.5em;">Lead Data Scientist</div>
+        <img src="/static/images/logo.png" alt="DataX" style="width:48px;height:auto;opacity:0.7;">
+      </div>
+      <div style="flex:1 1 180px;min-width:180px;max-width:220px;background:rgba(255,255,255,0.92);border-radius:18px;padding:1.5em 1em;box-shadow:0 2px 12px rgba(255,127,200,0.08);display:flex;flex-direction:column;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" style="width:60px;height:60px;border-radius:50%;border:2.5px solid #e26ad7;object-fit:cover;margin-bottom:0.7em;">
+        <div style="font-weight:800;color:#e26ad7;font-size:1.08em;">John Smith</div>
+        <div style="color:#888;font-size:0.98em;margin-bottom:0.5em;">AI Engineer</div>
+        <img src="/static/images/logo.png" alt="TechCorp" style="width:48px;height:auto;opacity:0.7;">
+      </div>
+      <div style="flex:1 1 180px;min-width:180px;max-width:220px;background:rgba(255,255,255,0.92);border-radius:18px;padding:1.5em 1em;box-shadow:0 2px 12px rgba(255,127,50,0.08);display:flex;flex-direction:column;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Emily Clark" style="width:60px;height:60px;border-radius:50%;border:2.5px solid #ff7f32;object-fit:cover;margin-bottom:0.7em;">
+        <div style="font-weight:800;color:#ff7f32;font-size:1.08em;">Emily Clark</div>
+        <div style="color:#888;font-size:0.98em;margin-bottom:0.5em;">Product Manager</div>
+        <img src="/static/images/logo.png" alt="RetailPro" style="width:48px;height:auto;opacity:0.7;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Bold Call to Action (CTA) Section -->
+  <section data-aos="zoom-in" style="max-width:900px;margin:3em auto 2em auto;padding:2.5em 1.5em;background:linear-gradient(120deg,#ff7f32 0%,#4a90e2 100%);border-radius:32px;box-shadow:0 8px 32px rgba(31,38,135,0.10);text-align:center;">
+    <h2 style="font-size:2.1rem;font-weight:900;color:#fff;margin-bottom:0.7em;letter-spacing:0.5px;font-family:'Inter','Segoe UI',sans-serif;">Ready to Share Your AI Success?</h2>
+    <p style="font-size:1.18em;color:#fff;opacity:0.95;margin-bottom:2em;">Submit your use case or get in touch to collaborate with our innovation-driven team. Let’s shape the future of AI together!</p>
+    <a href="#contact-section" style="display:inline-block;background:#fff;color:#ff7f32;font-weight:800;font-size:1.15em;padding:0.9em 2.5em;border-radius:30px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,0.10);transition:background 0.2s,color 0.2s,transform 0.2s;">Contact Us</a>
+  </section>
+
+  <!-- Contact Section -->
+  <div id="contact-section" data-aos="fade-left" style="max-width:300px;margin:32px auto 0 auto;background:var(--card-bg);border-radius:10px;padding:1.1em 1em;box-shadow:none;border:1px solid var(--card-border);">
+    <h2 style="color:var(--accent-orange);font-size:1.1em;margin-bottom:0.7em;">Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);">
+      <input type="email" placeholder="Your Email" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);">
+      <textarea placeholder="Your Message" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);min-height:48px;"></textarea>
+      <button type="submit" style="background:var(--accent-orange);color:#fff;border:none;border-radius:6px;padding:0.5em 1.2em;font-weight:bold;cursor:pointer;font-size:0.98em;">Send</button>
+    </form>
+    <div style="margin-top:0.7em;font-size:0.98em;">Or reach us at: <a href="mailto:info@aiinnovationfoundry.com">info@aiinnovationfoundry.com</a><br>+1-234-567-8901</div>
+  </div>
+  <!-- Modern Footer -->
+  <footer class="footer" id="contact" style="width:100vw;background:#232526;color:#eaeaea;text-align:center;padding:2em 0 1em 0;font-size:1.08em;border-top:none;margin-top:auto;border-radius:32px 32px 0 0;">
+    <div style="margin-bottom:0.5em;">
+      <a href="#" style="color:#fff;margin:0 12px;display:inline-block;"><i class="fab fa-linkedin fa-lg"></i></a>
+      <a href="#" style="color:#fff;margin:0 12px;display:inline-block;"><i class="fab fa-twitter fa-lg"></i></a>
+      <a href="#" style="color:#fff;margin:0 12px;display:inline-block;"><i class="fab fa-github fa-lg"></i></a>
+    </div>
+    <div style="font-size:1.3em;">&copy; 2024 AI & Innovation Foundry. All rights reserved.</div>
+  </footer>
+
+  <!-- Floating Action Button -->
+  <div class="fab" id="fab">💬</div>
+
+  <!-- Fake Chat UI -->
+  <div class="chat-box" id="chatBox">
+    <img src="https://assets10.lottiefiles.com/private_files/lf30_oqpbtola.json" alt="Chatbot Illustration" class="chat-illustration" onerror="this.style.display='none'" />
+    <div class="chat-header">Ask AI</div>
+    <div class="chat-messages">
+      <p><strong>AI:</strong> Hello! How can I assist you today?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type a message...">
+      <button>Send</button>
+    </div>
+  </div>
+
+  <!-- Floating decorative Lottie -->
+  <!-- Removed the floating Lottie animation -->
+
+  <!-- Scripts -->
+  <script>
+    AOS.init({ duration: 1000 });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 60, density: { enable: true, value_area: 800 } },
+          color: { value: "#ff7f32" },
+          shape: { type: "circle" },
+          opacity: { value: 0.18 },
+          size: { value: 4 },
+          line_linked: {
+            enable: true,
+            distance: 180,
+            color: "#ff7f32",
+            opacity: 0.12,
+            width: 1.2
+          },
+          move: { enable: true, speed: 1.2 }
+        },
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" }
+          },
+          modes: {
+            repulse: { distance: 100 },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    });
+
+    // 3D Tilt
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 20;
+        const rotateY = ((x - centerX) / centerX) * -20;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        card.style.transition = 'none';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.2s ease';
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+    });
+
+    // FAB Chat Toggle
+    document.getElementById('fab').addEventListener('click', () => {
+      const chat = document.getElementById('chatBox');
+      chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Search Filter
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const desc = card.dataset.description.toLowerCase();
+        if (title.includes(filter) || desc.includes(filter)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // NEW FEATURES
+
+    // Mobile Menu Toggle
+    document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('mobile-menu-open');
+    });
+
+    // Robust theme toggle logic (universal)
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('themeToggle');
+      function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeToggle.textContent = theme === 'dark' ? '🌙' : '🌓';
+      }
+      const savedTheme = localStorage.getItem('theme');
+      setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+      themeToggle.addEventListener('click', function() {
+        const current = document.body.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    });
+
+    // Filter Tags
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', function() {
+        // Remove active class from all tags
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const category = this.dataset.category;
+        
+        document.querySelectorAll('.card').forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        showToast(`Filtered by: ${this.textContent}`);
+      });
+    });
+
+    // Scroll Progress Bar
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    });
+
+    // Toast Notification Function
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Welcome Toast
+    setTimeout(() => {
+      showToast('Welcome to AI Studio! 🚀');
+    }, 1000);
+
+    // Scroll-fade-in animation for cards (copied from index.html)
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.scroll-fade-in').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+  <!-- Fake Login Modal -->
+  <div id="loginModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,32,38,0.55);z-index:2000;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(31,38,135,0.13);padding:2.2em 2em 1.5em 2em;max-width:340px;width:90vw;position:relative;display:flex;flex-direction:column;align-items:center;">
+      <button id="closeLoginModal" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5em;color:#888;cursor:pointer;">&times;</button>
+      <h2 style="font-size:1.4em;font-weight:800;color:var(--accent-orange);margin-bottom:1em;">Login</h2>
+      <input type="text" placeholder="Username" style="width:100%;padding:0.7em;margin-bottom:0.7em;border-radius:8px;border:1px solid var(--card-border);font-size:1em;background:var(--section-bg);color:var(--text-color);">
+      <input type="password" placeholder="Password" style="width:100%;padding:0.7em;margin-bottom:1em;border-radius:8px;border:1px solid var(--card-border);font-size:1em;background:var(--section-bg);color:var(--text-color);">
+      <button style="background:var(--accent-orange);color:#fff;border:none;border-radius:8px;padding:0.7em 2em;font-weight:bold;cursor:pointer;font-size:1em;">Login</button>
+    </div>
+  </div>
+  <script>
+    // Fake Login Modal Logic
+    document.getElementById('loginNavLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('loginModal').style.display = 'flex';
+    });
+    document.getElementById('closeLoginModal').addEventListener('click', function() {
+      document.getElementById('loginModal').style.display = 'none';
+    });
+    // Optional: Close modal on background click
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

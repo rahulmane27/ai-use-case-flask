@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - AI Use Cases</title>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root, [data-theme="light"] {
+      --bg-color: #fff;
+      --text-color: #232526;
+      --accent-orange: #ff7f32;
+      --accent-gray: #888;
+      --card-bg: #fff;
+      --card-border: #e0e0e0;
+      --nav-bg: #fff;
+    }
+    [data-theme="dark"] {
+      --bg-color: #181818;
+      --text-color: #f5f5f5;
+      --accent-orange: #ff7f32;
+      --accent-gray: #bbb;
+      --card-bg: #232526;
+      --card-border: #333;
+      --nav-bg: #232526;
+    }
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    nav {
+      background: var(--nav-bg);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      transition: background-color 0.3s ease;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .company-logo {
+      width: 180px;
+      height: auto;
+      transition: all 0.3s ease;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--accent-orange);
+    }
+    .admin-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 40px 0 20px 0;
+      color: var(--accent-orange);
+      letter-spacing: 1px;
+      background: transparent;
+    }
+    .admin-form-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      max-width: 500px;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      padding: 30px 30px 20px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      color: var(--text-color);
+    }
+    .admin-form-card input, .admin-form-card textarea, .admin-form-card select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--text-color);
+      margin-bottom: 8px;
+      transition: border 0.2s;
+    }
+    .admin-form-card input:focus, .admin-form-card textarea:focus, .admin-form-card select:focus {
+      border: 1.5px solid var(--accent-orange);
+      outline: none;
+    }
+    .admin-form-card button {
+      background: var(--accent-orange);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1rem;
+      transition: 0.2s;
+      margin-top: 8px;
+    }
+    .admin-form-card button:hover {
+      opacity: 0.92;
+      box-shadow: 0 2px 10px rgba(0,255,195,0.15);
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 12px;
+      background: transparent;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px;
+      width: 300px;
+      height: 200px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.06), 0 1.5px 8px 0 rgba(0,0,0,0.06);
+      will-change: transform;
+      perspective: 1000px;
+      transition: transform 0.2s ease, box-shadow 0.2s, background 0.2s;
+      position: relative;
+      cursor: pointer;
+      border: 1.5px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-color);
+    }
+    .card:hover {
+      background: rgba(0,255,195,0.10);
+      border: 1.5px solid var(--accent-orange);
+      box-shadow: 0 12px 40px 0 rgba(0,255,195,0.18);
+      transform: scale(1.03);
+    }
+    .card h3 {
+      color: var(--accent-orange);
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-line;
+      margin-bottom: 0.5em;
+      max-width: 100%;
+      height: 60px;
+      max-height: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      position: relative;
+      color: #555;
+    }
+    .visit-btn {
+      background: var(--accent-orange);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.2s;
+    }
+    .visit-btn:hover {
+      opacity: 0.85;
+    }
+    .toast {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.13);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      font-weight: bold;
+    }
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+    @media (max-width: 768px) {
+      .admin-title { font-size: 2rem; }
+      .admin-form-card { max-width: 95vw; padding: 18px 5vw; }
+      .container { padding: 10px; }
+      .card { width: 95vw; max-width: 350px; }
+      .company-logo { width: 120px; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:0.07;background-repeat:no-repeat;background-position:center;background-size:60vw;" aria-hidden="true">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Watermark Logo" style="width:100%;height:auto;max-width:900px;display:block;margin:auto;" />
+  </div>
+  <div class="toast" id="toast"></div>
+  <div id="particles-js"></div>
+  <nav>
+    <div class="nav-brand">
+      <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo"></a>
+    </div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/use-cases">Use Cases</a></li>
+      <li style="margin-left:auto;"><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
+    </ul>
+  </nav>
+  <div style="max-width:1200px;margin:30px auto 0 auto;padding:0 20px;">
+    <div style="background:rgba(0,255,195,0.10);border-radius:14px;padding:18px 24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,255,195,0.08);font-size:1.15rem;font-weight:bold;color:#00ffc3;display:flex;align-items:center;gap:18px;">
+      <i class="fas fa-database" style="font-size:1.3em;"></i>
+      Total Use Cases: <span id="totalUseCases">{{ use_cases|length }}</span>
+    </div>
+  </div>
+  <h1 class="admin-title">Admin: Manage AI Use Cases</h1>
+  <!-- Admin Add Use Case Form -->
+  <form class="admin-form-card" id="addUseCaseForm" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required />
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="url" name="url" placeholder="Website URL (https://...)" required />
+    <select name="category" required>
+      <option value="">Select Category</option>
+      <option value="finance">Finance</option>
+      <option value="customer-service">Customer Service</option>
+      <option value="hr">HR</option>
+      <option value="document">Document AI</option>
+      <option value="education">Education</option>
+      <option value="retail">Retail</option>
+      <option value="other">Other</option>
+    </select>
+    <input type="text" name="tech_used" placeholder="Technologies Used (comma separated)" />
+    <input type="url" name="demo_video_url" placeholder="Demo Video URL (https://...)" />
+    <input type="text" name="team_members" placeholder="Team Members (comma separated)" />
+    <textarea name="success_stories" placeholder="Success Stories"></textarea>
+    <label style="width:100%;text-align:left;margin-bottom:8px;">Logo Image:
+      <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+        <input type="file" name="logo_file" id="logoFileInput" accept="image/*" style="flex:1;" />
+        <img id="logoPreview" src="#" alt="Logo Preview" style="display:none;max-width:80px;max-height:80px;border-radius:10px;border:1px solid #eee;background:#fafafa;" />
+        <button type="button" id="removeAddLogoBtn" style="display:none;background:#ff4d4d;color:#fff;border:none;padding:6px 10px;border-radius:6px;font-size:0.95rem;">Remove</button>
+      </div>
+    </label>
+    <button type="button" id="previewBtn" style="margin-bottom: 10px;">Preview</button>
+    <button type="submit">Add Use Case</button>
+    <div id="formMsg" style="color: red; font-size: 0.95rem;"></div>
+  </form>
+  <!-- Preview Modal -->
+  <div id="previewModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;">
+    <div id="previewContent" style="background:#fff;color:#222;border-radius:12px;max-width:600px;width:95vw;padding:32px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.3);overflow-y:auto;max-height:90vh;">
+      <!-- Preview content will be injected here -->
+      <div id="previewInner"></div>
+      <div style="margin-top:24px;text-align:right;">
+        <button id="confirmAddBtn" style="background:#00ffc3;color:#111;padding:10px 24px;border:none;border-radius:6px;font-weight:bold;margin-right:10px;">Add</button>
+        <button id="cancelPreviewBtn" style="background:#eee;color:#333;padding:10px 24px;border:none;border-radius:6px;font-weight:bold;">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal-fade" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;transition:opacity 0.3s;opacity:0;">
+    <div id="editContent" style="background:#fff;color:#222;border-radius:12px;max-width:600px;width:95vw;padding:32px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.3);overflow-y:auto;max-height:90vh;animation:modalIn 0.3s;">
+      <h2 style="margin-top:0;margin-bottom:18px;color:#00ffc3;">Edit Use Case</h2>
+      <form id="editUseCaseForm" enctype="multipart/form-data">
+        <input type="hidden" name="index" id="editIndex" />
+        <div style="margin-bottom:12px;">
+          <label for="editTitle" style="font-weight:bold;">Title</label>
+          <input type="text" name="title" id="editTitle" placeholder="Title" required style="width:100%;margin-top:4px;" />
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editDescription" style="font-weight:bold;">Description</label>
+          <textarea name="description" id="editDescription" placeholder="Description" required style="width:100%;margin-top:4px;"></textarea>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editUrl" style="font-weight:bold;">Website URL</label>
+          <input type="url" name="url" id="editUrl" placeholder="Website URL (https://...)" required style="width:100%;margin-top:4px;" />
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editCategory" style="font-weight:bold;">Category</label>
+          <select name="category" id="editCategory" required style="width:100%;margin-top:4px;">
+            <option value="">Select Category</option>
+            <option value="finance">Finance</option>
+            <option value="customer-service">Customer Service</option>
+            <option value="hr">HR</option>
+            <option value="document">Document AI</option>
+            <option value="education">Education</option>
+            <option value="retail">Retail</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editTechUsed" style="font-weight:bold;">Technologies Used</label>
+          <input type="text" name="tech_used" id="editTechUsed" placeholder="Technologies Used (comma separated)" style="width:100%;margin-top:4px;" />
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editDemoVideoUrl" style="font-weight:bold;">Demo Video URL</label>
+          <input type="url" name="demo_video_url" id="editDemoVideoUrl" placeholder="Demo Video URL (https://...)" style="width:100%;margin-top:4px;" />
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editTeamMembers" style="font-weight:bold;">Team Members</label>
+          <input type="text" name="team_members" id="editTeamMembers" placeholder="Team Members (comma separated)" style="width:100%;margin-top:4px;" />
+        </div>
+        <div style="margin-bottom:12px;">
+          <label for="editSuccessStories" style="font-weight:bold;">Success Stories</label>
+          <textarea name="success_stories" id="editSuccessStories" placeholder="Success Stories" style="width:100%;margin-top:4px;"></textarea>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font-weight:bold;">Logo Image</label><br>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+            <img id="editLogoPreview" src="#" alt="Logo Preview" style="display:none;max-width:80px;max-height:80px;border-radius:10px;border:1px solid #eee;background:#fafafa;" />
+            <input type="file" name="logo_file" id="editLogoFileInput" accept="image/*" style="flex:1;" />
+            <button type="button" id="removeLogoBtn" style="display:none;background:#ff4d4d;color:#fff;border:none;padding:6px 10px;border-radius:6px;font-size:0.95rem;">Remove</button>
+          </div>
+        </div>
+        <div id="editFormMsg" style="color: red; font-size: 0.95rem;margin-bottom:10px;"></div>
+        <div id="editLoadingSpinner" style="display:none;text-align:center;margin-bottom:10px;">
+          <span style="color:#00ffc3;font-weight:bold;">Saving...</span>
+        </div>
+        <div style="margin-top:24px;text-align:right;">
+          <button type="submit" id="editSaveBtn" style="background:#00ffc3;color:#111;padding:10px 24px;border:none;border-radius:6px;font-weight:bold;margin-right:10px;">Save</button>
+          <button type="button" id="cancelEditBtn" style="background:#eee;color:#333;padding:10px 24px;border:none;border-radius:6px;font-weight:bold;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container" id="cardContainer">
+    {% for uc in use_cases %}
+    <div class="card" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}" data-index="{{ loop.index0 }}"
+         data-url="{{ uc.url }}" data-tech_used="{{ uc.tech_used }}" data-demo_video_url="{{ uc.demo_video_url }}" data-team_members="{{ uc.team_members }}" data-success_stories="{{ uc.success_stories }}" data-logo_url="{{ uc.logo_url }}"
+         style="margin:18px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;height:240px;max-height:240px;min-width:260px;max-width:340px;width:300px;">
+      <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
+        {% if uc.logo_url %}
+          <img src="{{ uc.logo_url }}" alt="Logo" style="max-width:60px;max-height:60px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
+        {% else %}
+          <img src="/static/images/logo.png" alt="Default Logo" style="max-width:60px;max-height:60px;margin-bottom:8px;opacity:0.3;" />
+        {% endif %}
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;width:100%;">
+          <h3 style="margin-bottom:10px;">{{ uc.title }}</h3>
+          <button class="edit-btn" title="Edit" style="background:transparent;border:none;cursor:pointer;font-size:1.2rem;margin-left:auto;display:flex;align-items:center;">
+            <span style="display:inline-block;width:22px;height:22px;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#ffc300" width="20" height="20"><path d="M15.41 2.59a2 2 0 0 1 2.83 2.83l-1.09 1.09-2.83-2.83 1.09-1.09zm-2.12 2.12l2.83 2.83-9.19 9.19c-.18.18-.4.31-.65.36l-3.07.61a.5.5 0 0 1-.59-.59l.61-3.07c.05-.25.18-.47.36-.65l9.19-9.19z"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <p style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;max-height:5.5em;word-break:break-word;white-space:pre-line;width:100%;">{{ uc.description }}</p>
+      <a href="{{ uc.url }}" class="visit-btn" target="_blank">Visit</a>
+      <button class="delete-btn" style="margin-top:10px;background:#ff4d4d;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:bold;">Delete</button>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.2,
+          width: 1
+        },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+    // Logo preview logic for Add form (with remove)
+    const logoFileInput = document.getElementById('logoFileInput');
+    const logoPreview = document.getElementById('logoPreview');
+    const removeAddLogoBtn = document.getElementById('removeAddLogoBtn');
+    let addLogoRemoved = false;
+    logoFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          logoPreview.src = ev.target.result;
+          logoPreview.style.display = 'block';
+          removeAddLogoBtn.style.display = 'inline-block';
+          addLogoRemoved = false;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        if (!addLogoRemoved) {
+        logoPreview.src = '#';
+        logoPreview.style.display = 'none';
+          removeAddLogoBtn.style.display = 'none';
+        }
+      }
+    });
+    removeAddLogoBtn.addEventListener('click', function() {
+      logoPreview.src = '#';
+      logoPreview.style.display = 'none';
+      removeAddLogoBtn.style.display = 'none';
+      logoFileInput.value = '';
+      addLogoRemoved = true;
+    });
+    // AJAX form submit (with file upload)
+    document.getElementById('addUseCaseForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formMsg = document.getElementById('formMsg');
+      formMsg.textContent = '';
+      const formData = new FormData(form);
+      // Only check required fields (file is optional)
+      if (!form.title.value.trim() || !form.description.value.trim() || !form.url.value.trim() || !form.category.value) {
+        formMsg.textContent = 'All fields are required.';
+        return;
+      }
+      try {
+        const resp = await fetch('/admin', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await resp.json();
+        if (result.success) {
+          // Add new card to UI (skip for now, reload instead)
+          form.reset();
+          logoPreview.src = '#';
+          logoPreview.style.display = 'none';
+          formMsg.textContent = '';
+          showToast('Use case added!');
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          formMsg.style.color = 'red';
+          formMsg.textContent = result.error || 'Failed to add use case.';
+        }
+      } catch (err) {
+        formMsg.style.color = 'red';
+        formMsg.textContent = 'Error: ' + err.message;
+      }
+    });
+    // Add after form submit handler
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async function(e) {
+        const card = e.target.closest('.card');
+        const index = card.getAttribute('data-index');
+        if (!confirm('Are you sure you want to delete this use case?')) return;
+        try {
+          const resp = await fetch('/admin/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ index })
+          });
+          const result = await resp.json();
+          if (result.success) {
+            card.remove();
+            showToast('Use case deleted!');
+          } else {
+            showToast(result.error || 'Failed to delete use case.');
+          }
+        } catch (err) {
+          showToast('Error: ' + err.message);
+        }
+      });
+    });
+    // Toast Notification Function
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      toast.style.zIndex = 3000;
+      toast.style.background = '#00ffc3';
+      toast.style.color = '#111';
+      setTimeout(() => {
+        toast.classList.remove('show');
+        toast.style.background = '';
+        toast.style.color = '';
+        toast.style.zIndex = '';
+      }, 3000);
+    }
+    // Preview logic
+    const previewBtn = document.getElementById('previewBtn');
+    const previewModal = document.getElementById('previewModal');
+    const previewInner = document.getElementById('previewInner');
+    const confirmAddBtn = document.getElementById('confirmAddBtn');
+    const cancelPreviewBtn = document.getElementById('cancelPreviewBtn');
+    const addUseCaseForm = document.getElementById('addUseCaseForm');
+    let previewData = null;
+
+    previewBtn.addEventListener('click', function() {
+      // Gather form data
+      const form = addUseCaseForm;
+      previewData = {
+        title: form.title.value.trim(),
+        description: form.description.value.trim(),
+        url: form.url.value.trim(),
+        category: form.category.value,
+        tech_used: form.tech_used.value.trim(),
+        demo_video_url: form.demo_video_url.value.trim(),
+        team_members: form.team_members.value.trim(),
+        success_stories: form.success_stories.value.trim()
+      };
+      // Render preview HTML (mimic landing page)
+      previewInner.innerHTML = `
+        <h1 style='color:#00ffc3;margin-bottom:12px;'>${previewData.title || ''}</h1>
+        <p style='font-size:1.1rem;'>${previewData.description || ''}</p>
+        <hr>
+        <div style='margin-bottom:10px;'><strong>Category:</strong> ${previewData.category || ''}</div>
+        ${previewData.tech_used ? `<div style='margin-bottom:10px;'><strong>Technologies Used:</strong> ${previewData.tech_used}</div>` : ''}
+        ${previewData.demo_video_url ? `<div style='margin-bottom:10px;'><strong>Demo Video:</strong><br><video width='480' controls><source src='${previewData.demo_video_url}' type='video/mp4'>Your browser does not support the video tag.</video></div>` : ''}
+        ${previewData.team_members ? `<div style='margin-bottom:10px;'><strong>Team Members:</strong> ${previewData.team_members}</div>` : ''}
+        ${previewData.success_stories ? `<div style='margin-bottom:10px;'><strong>Success Stories:</strong><div>${previewData.success_stories}</div></div>` : ''}
+        <a href='${previewData.url || '#'}' class='btn btn-primary' target='_blank' style='margin-right:10px;'>Visit Project</a>
+      `;
+      previewModal.style.display = 'flex';
+    });
+
+    cancelPreviewBtn.addEventListener('click', function() {
+      previewModal.style.display = 'none';
+    });
+
+    confirmAddBtn.addEventListener('click', function() {
+      previewModal.style.display = 'none';
+      // Submit the form programmatically
+      addUseCaseForm.requestSubmit();
+    });
+    // Edit logic
+    const editModal = document.getElementById('editModal');
+    const editUseCaseForm = document.getElementById('editUseCaseForm');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const editLogoFileInput = document.getElementById('editLogoFileInput');
+    const editLogoPreview = document.getElementById('editLogoPreview');
+    const editFormMsg = document.getElementById('editFormMsg');
+    const editLoadingSpinner = document.getElementById('editLoadingSpinner');
+    const editSaveBtn = document.getElementById('editSaveBtn');
+    const removeLogoBtn = document.getElementById('removeLogoBtn');
+    let currentEditCard = null;
+    let logoRemoved = false;
+
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const card = e.target.closest('.card');
+        currentEditCard = card;
+        // Fill modal fields with card data
+        document.getElementById('editIndex').value = card.getAttribute('data-index');
+        document.getElementById('editTitle').value = card.getAttribute('data-title') || '';
+        document.getElementById('editDescription').value = card.getAttribute('data-description') || '';
+        document.getElementById('editUrl').value = card.getAttribute('data-url') || '';
+        document.getElementById('editCategory').value = card.getAttribute('data-category') || '';
+        document.getElementById('editTechUsed').value = card.getAttribute('data-tech_used') || '';
+        document.getElementById('editDemoVideoUrl').value = card.getAttribute('data-demo_video_url') || '';
+        document.getElementById('editTeamMembers').value = card.getAttribute('data-team_members') || '';
+        document.getElementById('editSuccessStories').value = card.getAttribute('data-success_stories') || '';
+        // Logo preview
+        const logoUrl = card.getAttribute('data-logo_url');
+        if (logoUrl && logoUrl !== 'None') {
+          editLogoPreview.src = logoUrl;
+          editLogoPreview.style.display = 'block';
+          removeLogoBtn.style.display = 'inline-block';
+          logoRemoved = false;
+        } else {
+          editLogoPreview.src = '#';
+          editLogoPreview.style.display = 'none';
+          removeLogoBtn.style.display = 'none';
+          logoRemoved = false;
+        }
+        editLogoFileInput.value = '';
+        editFormMsg.textContent = '';
+        editLoadingSpinner.style.display = 'none';
+        editSaveBtn.disabled = false;
+        editModal.style.display = 'flex';
+        setTimeout(() => { editModal.style.opacity = 1; }, 10);
+      });
+    });
+    cancelEditBtn.addEventListener('click', function() {
+      editModal.style.opacity = 0;
+      setTimeout(() => { editModal.style.display = 'none'; }, 300);
+    });
+    // Logo preview for edit
+    editLogoFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          editLogoPreview.src = ev.target.result;
+          editLogoPreview.style.display = 'block';
+          removeLogoBtn.style.display = 'inline-block';
+          logoRemoved = false;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        if (!logoRemoved) {
+          editLogoPreview.src = '#';
+          editLogoPreview.style.display = 'none';
+          removeLogoBtn.style.display = 'none';
+        }
+      }
+    });
+    removeLogoBtn.addEventListener('click', function() {
+      editLogoPreview.src = '#';
+      editLogoPreview.style.display = 'none';
+      removeLogoBtn.style.display = 'none';
+      logoRemoved = true;
+    });
+    // Submit edit form
+    editUseCaseForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      editFormMsg.textContent = '';
+      editLoadingSpinner.style.display = 'block';
+      editSaveBtn.disabled = true;
+      const formData = new FormData(editUseCaseForm);
+      if (logoRemoved) formData.append('remove_logo', '1');
+      try {
+        const resp = await fetch('/admin/edit', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await resp.json();
+        editLoadingSpinner.style.display = 'none';
+        editSaveBtn.disabled = false;
+        if (result.success) {
+          showToast('Use case updated!');
+          // Update card in UI (no reload)
+          if (currentEditCard) {
+            currentEditCard.setAttribute('data-title', formData.get('title'));
+            currentEditCard.setAttribute('data-description', formData.get('description'));
+            currentEditCard.setAttribute('data-url', formData.get('url'));
+            currentEditCard.setAttribute('data-category', formData.get('category'));
+            currentEditCard.setAttribute('data-tech_used', formData.get('tech_used'));
+            currentEditCard.setAttribute('data-demo_video_url', formData.get('demo_video_url'));
+            currentEditCard.setAttribute('data-team_members', formData.get('team_members'));
+            currentEditCard.setAttribute('data-success_stories', formData.get('success_stories'));
+            if (result.logo_url) {
+              currentEditCard.setAttribute('data-logo_url', result.logo_url);
+            } else if (logoRemoved) {
+              currentEditCard.setAttribute('data-logo_url', '');
+            }
+            // Update visible fields
+            currentEditCard.querySelector('h3').textContent = formData.get('title');
+            currentEditCard.querySelector('p').textContent = formData.get('description');
+            currentEditCard.querySelector('a.visit-btn').href = formData.get('url');
+          }
+          editModal.style.opacity = 0;
+          setTimeout(() => { editModal.style.display = 'none'; }, 300);
+        } else {
+          editFormMsg.textContent = result.error || 'Failed to update use case.';
+        }
+      } catch (err) {
+        editLoadingSpinner.style.display = 'none';
+        editSaveBtn.disabled = false;
+        editFormMsg.textContent = 'Error: ' + err.message;
+      }
+    });
+    // Robust theme toggle logic (universal)
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('themeToggle');
+      function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeToggle.textContent = theme === 'dark' ? '🌙' : '🌓';
+      }
+      const savedTheme = localStorage.getItem('theme');
+      setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+      themeToggle.addEventListener('click', function() {
+        const current = document.body.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    });
+  </script>
+</body>
+</html> 

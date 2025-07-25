@@ -1,0 +1,90 @@
+[
+  {
+    "title": "Kanfig",
+    "description": "Kanfig is a web based platform that allows teams to build, clone, and deploy production ready environments across multi-cloud infrastructure—without engineering overhead. Ideal for streamlining DevOps, governance, and infrastructure consistency.",
+    "url": "https://kanfig.com",
+    "category": "customer-service",
+    "tech_used": "GitOps , Docker & Kubernetes, Managed cloud services, Automated reconciliation engine, Opinionated Platform",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Build and clone production ready environments in minutes.\r\nreducing setup time and human error.\r\nAccelerated developer workspace provisioning through GitOps based workflows.\r\nBuilt-in governance, drift remediation, and audit trails improve reliability and maintainability.",
+    "logo_url": "/static/images/Screenshot_2025-07-20_223630-removebg-preview.png"
+  },
+  {
+    "title": "Nimbledox.ai",
+    "description": "Nimbledox.ai is a cutting-edge IDP solution designed to automate the extraction, interpretation, and processing of data from over 50+ document types. It transforms unstructured and semi-structured files into structured, actionable formats, closely replicating how humans read and process documents",
+    "url": "https://nimbledox.ai/",
+    "category": "document",
+    "tech_used": "Optical Character Recognition, Natural Language Processing (NLP), Machine Learning, AI-based workflow",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Achieved 80% reduction in manual document processing time\r\nImproved 95% data accuracy",
+    "logo_url": "/static/images/Screenshot_2025-07-21_000839-removebg-preview.png"
+  },
+  {
+    "title": "CoeusCoder",
+    "description": "CoeusCoder is an AI-driven platform that automates Hierarchical Condition Category (HCC) coding using NLP and machine learning, significantly reducing manual effort while maintaining compliance and accuracy.",
+    "url": "https://coeuscoder.com/",
+    "category": "customer-service",
+    "tech_used": "NLP & Machine Learning, Optical Character Recognition (OCR), EHR Integration, Cloud-based SaaS (HIPAA compliant)",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Reduced manual HCC coding effort by 60%.\r\nImproved coding accuracy by 30%.\r\nAchieved up to 3× faster throughput.\r\nProcessed 70,000 medical charts in 1.5 months in a combined human–AI workflow.",
+    "logo_url": "/static/images/Screenshot_2025-07-21_085357-removebg-preview.png"
+  },
+  {
+    "title": "FinSight AI",
+    "description": "FinSight AI leverages predictive analytics and machine learning to provide real-time fraud detection and risk assessment for financial institutions, reducing losses and improving compliance.",
+    "url": "https://finsightai.com/",
+    "category": "finance",
+    "tech_used": "Predictive Analytics, Machine Learning, Real-time Data Processing, Cloud APIs",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Reduced fraud losses by 45% in the first year.\r\nEnabled real-time risk scoring for over 1 million transactions per day.",
+    "logo_url": "/static/images/finance_placeholder.png"
+  },
+  {
+    "title": "EduBot",
+    "description": "EduBot is an AI-powered virtual tutor that personalizes learning paths for students, provides instant feedback, and automates grading for educators.",
+    "url": "https://edubot.com/",
+    "category": "education",
+    "tech_used": "Natural Language Processing, Adaptive Learning Algorithms, Chatbot Frameworks",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Improved student test scores by 20% on average.\r\nSaved teachers 10+ hours per week on grading and feedback.",
+    "logo_url": "/static/images/education_placeholder.png"
+  },
+  {
+    "title": "RetailVision",
+    "description": "RetailVision uses computer vision and AI to optimize shelf stocking, track inventory in real time, and analyze customer behavior in retail stores.",
+    "url": "https://retailvision.com/",
+    "category": "retail",
+    "tech_used": "Computer Vision, IoT Sensors, Deep Learning, Edge Computing",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Reduced out-of-stock incidents by 35%.\r\nIncreased sales by 12% through optimized shelf placement.",
+    "logo_url": "/static/images/retail_placeholder.png"
+  },
+  {
+    "title": "HRMatch",
+    "description": "HRMatch is an AI-driven recruitment platform that screens resumes, matches candidates to job descriptions, and automates interview scheduling for HR teams.",
+    "url": "https://hrmatch.com/",
+    "category": "hr",
+    "tech_used": "Resume Parsing, Machine Learning, Automated Scheduling, Cloud SaaS",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Reduced time-to-hire by 50%.\r\nImproved candidate-job fit and reduced manual screening workload.",
+    "logo_url": "/static/images/hr_placeholder.png"
+  },
+  {
+    "title": "SupplyAI",
+    "description": "SupplyAI optimizes supply chain logistics using AI-powered demand forecasting, route optimization, and real-time tracking for manufacturers and distributors.",
+    "url": "https://supplyai.com/",
+    "category": "supply-chain",
+    "tech_used": "Demand Forecasting, Route Optimization, Real-time Tracking, AI Analytics",
+    "demo_video_url": "",
+    "team_members": "Not publicly listed",
+    "success_stories": "Reduced delivery times by 18%.\r\nLowered logistics costs by 22% for enterprise clients.",
+    "logo_url": "/static/images/supplychain_placeholder.png"
+  }
+]
