@@ -186,9 +186,9 @@
     </nav>
     <div class="hero-section" data-aos="fade-down" style="padding-top: 60px;">
         {% if use_case.logo_url %}
-            <img src="{{ use_case.logo_url }}" alt="Use Case Logo" class="img-fluid" style="max-width:120px;max-height:120px;margin-bottom:18px;" onerror="this.style.display='none'" >
+            <img src="{{ use_case.logo_url }}" alt="Use Case Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;" onerror="this.style.display='none'" >
         {% else %}
-            <img src="/static/images/logo.png" alt="Default Logo" class="img-fluid" style="max-width:120px;max-height:120px;margin-bottom:18px;opacity:0.3;" >
+            <img src="/static/images/logo.png" alt="Default Logo" style="max-width:120px;max-height:120px;margin-bottom:18px;opacity:0.3;" >
         {% endif %}
         <div class="hero-title">{{ use_case.title }}</div>
         <div class="hero-desc">{{ use_case.description }}</div>
@@ -207,7 +207,7 @@
     {% if use_case.demo_video_url %}
     <div class="section video-section" data-aos="zoom-in">
         <div class="section-title">Demo Video</div>
-        <video controls class="w-100" style="max-width:600px;">
+        <video controls>
             <source src="{{ use_case.demo_video_url }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>

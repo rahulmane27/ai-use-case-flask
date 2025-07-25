@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Use Cases</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -613,6 +612,120 @@
     footer {
       flex-shrink: 0;
     }
+    /* HERO SECTION FLEXBOX RESPONSIVE */
+    .hero-section {
+      width: 100vw;
+      min-height: 55vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, var(--accent-orange) 0%, var(--accent-gray) 100%);
+      border-radius: 0 0 48px 48px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+      margin-bottom: 2em;
+      position: relative;
+      padding: 40px 0 0 0;
+      gap: 32px;
+    }
+    .hero-content {
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+      margin-top: 60px;
+      flex: 2 1 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .hero-content h1 {
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 0.5em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      text-align: left;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #fff;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 2em;
+      text-align: left;
+    }
+    .hero-content .cta-btn {
+      background: var(--accent-orange);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 18px 48px;
+      font-size: 1.25rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      text-decoration: none;
+      margin-bottom: 2.5em;
+      display: inline-block;
+    }
+    .hero-animation {
+      position: relative;
+      z-index: 1;
+      flex: 1 1 220px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      min-width: 180px;
+      height: 220px;
+      margin-bottom: 0;
+    }
+    .hero-animation lottie-player {
+      width: 220px !important;
+      height: 220px !important;
+      max-width: 100%;
+      max-height: 220px;
+    }
+    @media (max-width: 1100px) {
+      .hero-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 30px 0 0 0;
+      }
+      .hero-content {
+        margin-top: 30px;
+        text-align: center;
+        align-items: center;
+      }
+      .hero-content h1, .hero-content p {
+        text-align: center;
+      }
+      .hero-animation {
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-section {
+        min-height: 40vh;
+        padding: 18px 0 0 0;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1.05rem;
+      }
+      .hero-animation lottie-player {
+        width: 140px !important;
+        height: 140px !important;
+      }
+    }
   </style>
 </head>
 <body data-theme="light">
@@ -622,44 +735,41 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="nav-brand">
-        <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo img-fluid"></a>
-      </div>
-      <div class="mobile-menu-toggle" id="mobileMenuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul id="navMenu" class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#usecases-section">Use Cases</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="loginNavLink">Login</a></li>
-        <li class="nav-item" style="margin-left:auto;"><button class="theme-toggle btn btn-light" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
-      </ul>
+  <nav>
+    <div class="nav-brand">
+      <a href="/use-cases" style="display:block;"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="company-logo"></a>
     </div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="navMenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="#about-section">About</a></li>
+      <li><a href="#usecases-section">Use Cases</a></li>
+      <li><a href="#contact-section">Contact</a></li>
+      <li><a href="#" id="loginNavLink">Login</a></li>
+      <li style="margin-left:auto;"><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌓</button></li>
+    </ul>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-section" data-aos="fade-down" style="width:100vw;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(120deg, var(--accent-orange) 0%, var(--accent-gray) 100%);border-radius:0 0 48px 48px;box-shadow:0 8px 32px 0 rgba(31,38,135,0.10);margin-bottom:2em;position:relative;">
-    <div style="z-index:2;max-width:700px;text-align:center;margin-top:60px;">
-      <h1 style="font-size:2.7rem;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:0.5em;text-shadow:0 2px 16px rgba(0,0,0,0.10);">AI in Business – Use Cases That Deliver</h1>
-      <p style="font-size:1.3rem;color:#fff;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:2em;">Explore strategic AI implementations driving innovation, efficiency, and growth across departments. From predictive analytics to intelligent automation, see how enterprises are making smarter decisions with AI.</p>
-      <a href="#usecases-section" class="cta-btn" style="background:var(--accent-orange);color:#fff;border:none;border-radius:25px;padding:18px 48px;font-size:1.25rem;font-weight:bold;cursor:pointer;transition:background 0.2s,color 0.2s,transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(0,0,0,0.10);text-decoration:none;margin-bottom:2.5em;display:inline-block;">Browse Use Cases</a>
+  <section class="hero-section" data-aos="fade-down">
+    <div class="hero-content">
+      <h1>AI in Business – Use Cases That Deliver</h1>
+      <p>Explore strategic AI implementations driving innovation, efficiency, and growth across departments. From predictive analytics to intelligent automation, see how enterprises are making smarter decisions with AI.</p>
+      <a href="#usecases-section" class="cta-btn">Browse Use Cases</a>
     </div>
-    <div style="position:absolute;right:32px;bottom:0;z-index:1;">
-    <lottie-player
-      src="https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json"
-      background="transparent"
-      speed="1"
-        style="width: 220px; height: 220px;"
-      loop
-      autoplay>
-    </lottie-player>
-  </div>
+    <div class="hero-animation">
+      <lottie-player
+        src="https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay>
+      </lottie-player>
+    </div>
   </section>
 
   <!-- Search -->
@@ -689,13 +799,13 @@
       {% if use_cases and use_cases|length > 0 %}
     {% for uc in use_cases %}
     <a href="{{ url_for('use_case_landing', use_case_id=loop.index0) }}" style="text-decoration: none; color: inherit;">
-          <div class="card scroll-fade-in h-100" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}">
+          <div class="card scroll-fade-in" data-title="{{ uc.title }}" data-description="{{ uc.description }}" data-category="{{ uc.category }}">
         <div class="card-inner">
           <div class="card-front">
             {% if uc.logo_url %}
-              <img src="{{ uc.logo_url }}" alt="Logo" class="img-fluid" style="max-width:48px;max-height:48px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
+              <img src="{{ uc.logo_url }}" alt="Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;border-radius:8px;object-fit:contain;background:#fff;" onerror="this.style.display='none'" />
             {% else %}
-              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Default Logo" class="img-fluid" style="max-width:48px;max-height:48px;margin-bottom:8px;opacity:0.3;" />
+              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Default Logo" style="max-width:48px;max-height:48px;margin-bottom:8px;opacity:0.3;" />
             {% endif %}
                 <h3 style="font-size:1.18em;font-weight:700;color:var(--accent-orange);margin-bottom:0.3em;">{{ uc.title }}</h3>
                 <p style="font-size:1em;color:var(--text-color);margin-bottom:0.7em;">{{ uc.description }}</p>
