@@ -6,7 +6,6 @@
     <title>AI & Innovation Foundry</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root, [data-theme="light"] {
             --bg-color: #faf9f6;
@@ -810,34 +809,32 @@
     <div id="particles-js"></div>
         <!-- Loading Animation Overlay -->
         <div class="loading-overlay" id="loadingOverlay">
-            <video class="gif-animation img-fluid" id="gifAnimation" autoplay muted playsinline>
+            <video class="gif-animation" id="gifAnimation" autoplay muted playsinline>
                 <source src="{{ url_for('static', filename='opening-animation.mp4') }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
         <!-- Main Content (appears after animation) -->
-        <div class="main-content container-fluid" id="mainContent">
+        <div class="main-content" id="mainContent">
         <a href="/use-cases" class="logo-fixed-corner">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-corner-img img-fluid">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-corner-img">
         </a>
         <!-- Professional, Simple Hero Section -->
-    <section class="main-hero-section row justify-content-center" data-aos="fade-down">
-      <div class="col-12">
-        <h1>
-          Innovative IT Services & Solutions Aimed At Global Digital Transformation
-          <span class="hero-underline"></span>
-        </h1>
-        <p><strong>Neutrino Tech Systems</strong> simplifies your move to technology with a comprehensive range of IT solutions that enhance your business outcomes.</p>
-        <p>With over 100 years of combined experience, we deliver exceptional services to global clients across various industries, including healthcare, supply chain and distribution, fintech, retail, and more, using a proven onshore/offshore delivery model.</p>
-        <a href="/use-cases" class="cta-btn btn btn-primary" style="margin-top:2.5em;display:inline-block;padding:12px 32px;font-size:1.08rem;border-radius:18px;">Explore Use Cases</a>
-      </div>
+    <section class="main-hero-section" data-aos="fade-down">
+      <h1>
+        Innovative IT Services & Solutions Aimed At Global Digital Transformation
+        <span class="hero-underline"></span>
+      </h1>
+      <p><strong>Neutrino Tech Systems</strong> simplifies your move to technology with a comprehensive range of IT solutions that enhance your business outcomes.</p>
+      <p>With over 100 years of combined experience, we deliver exceptional services to global clients across various industries, including healthcare, supply chain and distribution, fintech, retail, and more, using a proven onshore/offshore delivery model.</p>
+      <a href="/use-cases" class="cta-btn" style="margin-top:2.5em;display:inline-block;padding:12px 32px;font-size:1.08rem;border-radius:18px;">Explore Use Cases</a>
     </section>
     <!-- About Section -->
-    <section class="about-section row align-items-center" id="about" data-aos="fade-right">
-      <div class="about-logo col-12 col-md-3 text-center">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo" class="img-fluid">
+    <section class="about-section" id="about" data-aos="fade-right">
+      <div class="about-logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
       </div>
-      <div class="about-content col-12 col-md-9">
+      <div class="about-content">
         <h2>About AI & Innovation Foundry</h2>
         <p>AI & Innovation Foundry is a leading provider of advanced artificial intelligence solutions. Our vision is to empower organizations with intelligent systems that drive efficiency, innovation, and growth.</p>
         <ul>
@@ -848,37 +845,37 @@
       </div>
     </section>
     <!-- IT Services Section -->
-    <h2 class="text-center mt-5" data-aos="fade-up">IT Services</h2>
-    <div class="simple-grid row justify-content-center" data-aos="fade-up">
-      <div class="simple-card col-12 col-sm-6 col-md-3"><i class="fas fa-cloud"></i><h3>Cloud Solutions</h3><p>Scalable, secure cloud migration and management.</p></div>
-      <div class="simple-card col-12 col-sm-6 col-md-3"><i class="fas fa-shield-alt"></i><h3>Cybersecurity</h3><p>Protect your business with advanced security services.</p></div>
-      <div class="simple-card col-12 col-sm-6 col-md-3"><i class="fas fa-cogs"></i><h3>Automation</h3><p>Streamline operations with intelligent automation.</p></div>
-      <div class="simple-card col-12 col-sm-6 col-md-3"><i class="fas fa-database"></i><h3>Data Engineering</h3><p>Build robust data pipelines and analytics platforms.</p></div>
+    <h2 style="text-align:center;margin-top:3em;" data-aos="fade-up">IT Services</h2>
+    <div class="simple-grid" data-aos="fade-up">
+      <div class="simple-card"><i class="fas fa-cloud"></i><h3>Cloud Solutions</h3><p>Scalable, secure cloud migration and management.</p></div>
+      <div class="simple-card"><i class="fas fa-shield-alt"></i><h3>Cybersecurity</h3><p>Protect your business with advanced security services.</p></div>
+      <div class="simple-card"><i class="fas fa-cogs"></i><h3>Automation</h3><p>Streamline operations with intelligent automation.</p></div>
+      <div class="simple-card"><i class="fas fa-database"></i><h3>Data Engineering</h3><p>Build robust data pipelines and analytics platforms.</p></div>
     </div>
     <!-- Why Choose Us -->
-    <h2 class="text-center mt-5" data-aos="fade-left">Why Choose Us</h2>
-    <div class="why-row row justify-content-center" data-aos="fade-left">
-      <div class="why-item col-6 col-md-2"><i class="fas fa-user-graduate"></i><span>Expert Team</span></div>
-      <div class="why-item col-6 col-md-2"><i class="fas fa-check-circle"></i><span>Proven Results</span></div>
-      <div class="why-item col-6 col-md-2"><i class="fas fa-chart-line"></i><span>Business Value</span></div>
-      <div class="why-item col-6 col-md-2"><i class="fas fa-hands-helping"></i><span>End-to-End Support</span></div>
-      <div class="why-item col-6 col-md-2"><i class="fas fa-balance-scale"></i><span>Ethical AI</span></div>
+    <h2 style="text-align:center;margin-top:3em;" data-aos="fade-left">Why Choose Us</h2>
+    <div class="why-row" data-aos="fade-left">
+      <div class="why-item"><i class="fas fa-user-graduate"></i><span>Expert Team</span></div>
+      <div class="why-item"><i class="fas fa-check-circle"></i><span>Proven Results</span></div>
+      <div class="why-item"><i class="fas fa-chart-line"></i><span>Business Value</span></div>
+      <div class="why-item"><i class="fas fa-hands-helping"></i><span>End-to-End Support</span></div>
+      <div class="why-item"><i class="fas fa-balance-scale"></i><span>Ethical AI</span></div>
     </div>
     <!-- Testimonials -->
-    <div class="testimonials row justify-content-center" data-aos="zoom-in">
-      <blockquote class="col-12 col-md-6">"The AI & Innovation Foundry team helped us unlock new business opportunities with their innovative solutions!"<br><b>- Alex Turner, CTO, TechCorp</b></blockquote>
-      <blockquote class="col-12 col-md-6">"Professional, knowledgeable, and results-driven. Highly recommended!"<br><b>- Priya Singh, Head of Analytics, DataX</b></blockquote>
+    <div class="testimonials" data-aos="zoom-in">
+      <blockquote>"The AI & Innovation Foundry team helped us unlock new business opportunities with their innovative solutions!"<br><b>- Alex Turner, CTO, TechCorp</b></blockquote>
+      <blockquote>"Professional, knowledgeable, and results-driven. Highly recommended!"<br><b>- Priya Singh, Head of Analytics, DataX</b></blockquote>
     </div>
     <!-- Team -->
-    <h2 class="text-center mt-5" data-aos="fade-up-right">Our Team</h2>
-    <div class="team-row row justify-content-center" data-aos="fade-up-right">
-      <div class="team-member col-6 col-md-3"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Rahul Mane" class="img-fluid"><div class="name">Rahul Mane</div><div class="role">Founder & CEO</div></div>
-      <div class="team-member col-6 col-md-3"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jane Doe" class="img-fluid"><div class="name">Jane Doe</div><div class="role">Lead Data Scientist</div></div>
-      <div class="team-member col-6 col-md-3"><img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="img-fluid"><div class="name">John Smith</div><div class="role">AI Engineer</div></div>
-      <div class="team-member col-6 col-md-3"><img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Emily Clark" class="img-fluid"><div class="name">Emily Clark</div><div class="role">Product Manager</div></div>
+    <h2 style="text-align:center;margin-top:3em;" data-aos="fade-up-right">Our Team</h2>
+    <div class="team-row" data-aos="fade-up-right">
+      <div class="team-member"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Rahul Mane"><div class="name">Rahul Mane</div><div class="role">Founder & CEO</div></div>
+      <div class="team-member"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jane Doe"><div class="name">Jane Doe</div><div class="role">Lead Data Scientist</div></div>
+      <div class="team-member"><img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith"><div class="name">John Smith</div><div class="role">AI Engineer</div></div>
+      <div class="team-member"><img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Emily Clark"><div class="name">Emily Clark</div><div class="role">Product Manager</div></div>
     </div>
     <!-- News -->
-    <h2 class="text-center mt-5" data-aos="fade-up">Latest News</h2>
+    <h2 style="text-align:center;margin-top:3em;" data-aos="fade-up">Latest News</h2>
     <ul class="news-list" data-aos="fade-up">
       <li><b>July 2024:</b> Launched our new AI-powered analytics platform.</li>
       <li><b>June 2024:</b> Recognized as a top AI innovator by TechReview.</li>
@@ -888,15 +885,15 @@
     <div class="contact-section" data-aos="fade-left" style="max-width:300px;margin:32px auto 0 auto;padding:1.1em 1em;border-radius:10px;">
       <h2 style="color:var(--accent-orange);font-size:1.1em;margin-bottom:0.7em;">Contact Us</h2>
       <form>
-        <input type="text" placeholder="Your Name" class="form-control mb-2">
-        <input type="email" placeholder="Your Email" class="form-control mb-2">
-        <textarea placeholder="Your Message" class="form-control mb-2" style="min-height:48px;"></textarea>
-        <button type="submit" class="btn btn-primary w-100">Send</button>
+        <input type="text" placeholder="Your Name" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);">
+        <input type="email" placeholder="Your Email" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);">
+        <textarea placeholder="Your Message" style="width:100%;padding:0.45em;margin-bottom:0.5em;border-radius:6px;border:1px solid var(--card-border);font-size:0.98em;background:var(--section-bg);color:var(--text-color);min-height:48px;"></textarea>
+        <button type="submit" style="background:var(--accent-orange);color:#fff;border:none;border-radius:6px;padding:0.5em 1.2em;font-weight:bold;cursor:pointer;font-size:0.98em;">Send</button>
       </form>
       <div style="margin-top:0.7em;font-size:0.98em;">Or reach us at: <a href="mailto:info@aiinnovationfoundry.com">info@aiinnovationfoundry.com</a><br>+1-234-567-8901</div>
     </div>
     <!-- Footer -->
-    <footer class="footer mt-5" id="contact" data-aos="fade-up">
+    <footer class="footer" id="contact" data-aos="fade-up">
       <div style="margin-bottom:0.5em;">
         <a href="#"><i class="fab fa-linkedin fa-lg"></i></a>
         <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
@@ -906,7 +903,6 @@
     </footer>
     </div>
     <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" style="position:fixed;top:24px;right:32px;z-index:1001;">🌓</button>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Particles.js animated background (brand orange)
         document.addEventListener('DOMContentLoaded', function() {
