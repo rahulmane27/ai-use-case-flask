@@ -114,14 +114,16 @@ button:hover {
     margin: 10px 0;
   }
   .card-footer, .card .button-row {
-    flex-direction: column;
+    flex-direction: column !important;
     gap: 8px;
     align-items: stretch;
   }
   .cta-btn, .details-btn, .card-category {
-    width: 100%;
+    width: 100% !important;
     margin: 0 0 8px 0;
     font-size: 1rem;
+    display: block;
+    text-align: center;
   }
   .filter-container, .category-row {
     flex-wrap: wrap;
@@ -135,5 +137,19 @@ button:hover {
     padding: 1.5em 0.5em;
     background: rgba(255,255,255,0.85);
     border-radius: 16px;
+  }
+}
+@media (min-width: 601px) {
+  .card-footer, .card .button-row {
+    flex-direction: row !important;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .cta-btn, .details-btn, .card-category {
+    width: auto !important;
+    margin: 0;
+    display: inline-block;
+    text-align: center;
   }
 } 
